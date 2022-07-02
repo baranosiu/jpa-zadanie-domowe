@@ -1,7 +1,5 @@
 package local.pbaranowski.jpa;
 
-import lombok.extern.slf4j.Slf4j;
-
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +36,8 @@ public class Tests {
         UUID seller3 = sellerRepository.save(new Seller(contactDetails3));
         printList(sellerRepository.find());
 
+        printList(sellerRepository.find(seller2));
+
         printList(buyerRepository.find());
 
         BuyerRepository buyerRepository2 = FACTORY.BuyersRepository();
@@ -49,6 +49,7 @@ public class Tests {
     }
 
     private static void printList(List list) {
+        System.out.println("------------------------------------------");
         list.forEach(System.out::println);
     }
 }
