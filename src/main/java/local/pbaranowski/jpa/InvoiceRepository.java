@@ -21,6 +21,11 @@ public class InvoiceRepository {
         doInTransaction(EntityManager::merge, invoice);
     }
 
+    void update(UUID id) {
+        find(id).forEach(invoice -> update(invoice));
+    }
+
+
     void delete(Invoice invoice) {
         doInTransaction(EntityManager::remove, invoice);
     }

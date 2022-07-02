@@ -21,13 +21,16 @@ public class BuyerRepository {
         doInTransaction(EntityManager::merge, buyer);
     }
 
+    void update(UUID id) {
+        find(id).forEach(buyer -> update(buyer));
+    }
+
     void delete(Buyer buyer) {
         doInTransaction(EntityManager::remove, buyer);
     }
 
     void delete(UUID id) {
-        List<Buyer> buyersToDelete = find(id);
-        buyersToDelete.forEach(buyer -> delete(buyer));
+        find(id).forEach(buyer -> delete(buyer));
     }
 
     UUID doInTransaction(BiConsumer<EntityManager, Buyer> biConsumer, Buyer buyer) {

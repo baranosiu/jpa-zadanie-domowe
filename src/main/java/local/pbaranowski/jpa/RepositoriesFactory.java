@@ -17,8 +17,13 @@ public class RepositoriesFactory {
     public BuyerRepository BuyersRepository() {
         return new BuyerRepository(entityManagerFactory.createEntityManager());
     }
+
     public InvoiceRepository InvoiceRepository() {
         return new InvoiceRepository(entityManagerFactory.createEntityManager());
+    }
+
+    public SellerRepository SellerRepository() {
+        return new SellerRepository(entityManagerFactory.createEntityManager());
     }
 
     public void close() {
