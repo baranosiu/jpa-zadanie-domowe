@@ -19,14 +19,8 @@ public class Seller {
 
     @Setter
     @Embedded
-    @AttributeOverride(
-            name = "phone",
-            column = @Column(name = "seller_phone", length = 20)
-    )
-    @AttributeOverride(
-            name = "mail",
-            column = @Column(name = "seller_mail", length = 150)
-    )
+    @AttributeOverride(name = "phone", column = @Column(name = "seller_phone", length = 20))
+    @AttributeOverride(name = "mail", column = @Column(name = "seller_mail", length = 150))
     private ContactDetails contactDetails;
 
     public Seller(UUID id, ContactDetails contactDetails) {

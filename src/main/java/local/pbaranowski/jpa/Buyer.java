@@ -16,18 +16,9 @@ public class Buyer {
     private UUID id;
 
     @Embedded
-    @AttributeOverride(
-            name = "login",
-            column = @Column(name = "buy_login")
-    )
-    @AttributeOverride(
-            name = "phone",
-            column = @Column(name = "phone_number", length = 20)
-    )
-    @AttributeOverride(
-            name = "mail",
-            column = @Column(name = "mail_address", length = 150)
-    )
+    @AttributeOverride(name = "login", column = @Column(name = "buy_login"))
+    @AttributeOverride(name = "phone", column = @Column(name = "phone_number", length = 20))
+    @AttributeOverride(name = "mail", column = @Column(name = "mail_address", length = 150))
     private ContactDetails contactDetails;
 
     public Buyer(UUID id, ContactDetails contactDetails) {
