@@ -1,6 +1,5 @@
 package local.pbaranowski.jpa;
 
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 

@@ -22,7 +22,7 @@ public class BuyerRepository {
     }
 
     void update(UUID id) {
-        find(id).forEach(buyer -> update(buyer));
+        find(id).forEach(this::update);
     }
 
     void delete(Buyer buyer) {
@@ -30,7 +30,7 @@ public class BuyerRepository {
     }
 
     void delete(UUID id) {
-        find(id).forEach(buyer -> delete(buyer));
+        find(id).forEach(this::delete);
     }
 
     UUID doInTransaction(BiConsumer<EntityManager, Buyer> biConsumer, Buyer buyer) {
@@ -39,6 +39,10 @@ public class BuyerRepository {
         biConsumer.accept(entityManager, buyer);
         transaction.commit();
         return buyer.getId();
+    }
+
+    List<Buyer> find() {
+        return find(null);
     }
 
     List<Buyer> find(UUID id) {

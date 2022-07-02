@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.function.BiConsumer;
 
+
 public class SellerRepository {
     private final EntityManager entityManager;
 
@@ -22,7 +23,7 @@ public class SellerRepository {
     }
 
     void update(UUID id) {
-        find(id).forEach(seller -> update(seller));
+        find(id).forEach(this::update);
     }
 
     void delete(Seller seller) {
@@ -30,7 +31,7 @@ public class SellerRepository {
     }
 
     void delete(UUID id) {
-        find(id).forEach(seller -> delete(seller));
+        find(id).forEach(this::delete);
     }
 
     UUID doInTransaction(BiConsumer<EntityManager, Seller> biConsumer, Seller seller) {
@@ -39,6 +40,10 @@ public class SellerRepository {
         biConsumer.accept(entityManager, seller);
         transaction.commit();
         return seller.getId();
+    }
+
+    List<Seller> find() {
+        return find(null);
     }
 
     List<Seller> find(UUID id) {

@@ -22,7 +22,7 @@ public class InvoiceRepository {
     }
 
     void update(UUID id) {
-        find(id).forEach(invoice -> update(invoice));
+        find(id).forEach(this::update);
     }
 
 
@@ -31,7 +31,7 @@ public class InvoiceRepository {
     }
 
     void delete(UUID id) {
-        find(id).forEach(invoice -> delete(invoice));
+        find(id).forEach(this::delete);
     }
 
     UUID doInTransaction(BiConsumer<EntityManager, Invoice> biConsumer, Invoice invoice) {
@@ -40,6 +40,10 @@ public class InvoiceRepository {
         biConsumer.accept(entityManager, invoice);
         transaction.commit();
         return invoice.getId();
+    }
+
+    List<Invoice> find() {
+        return find(null);
     }
 
     List<Invoice> find(UUID id) {
