@@ -1,11 +1,11 @@
 package local.pbaranowski.jpa;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.util.UUID;
 
 @ToString
@@ -14,7 +14,6 @@ public class Seller {
 
     @Getter
     @Id
-    @Type(type = "uuid-char")
     private UUID id;
 
     @Setter

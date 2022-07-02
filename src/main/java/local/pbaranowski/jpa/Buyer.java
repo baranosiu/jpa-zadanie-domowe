@@ -1,10 +1,9 @@
 package local.pbaranowski.jpa;
 
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
 
-import javax.persistence.*;
 import java.util.UUID;
 
 @ToString
@@ -12,7 +11,6 @@ import java.util.UUID;
 public class Buyer {
     @Id
     @Getter
-    @Type(type = "uuid-char")
     private UUID id;
 
     @Embedded
