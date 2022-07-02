@@ -4,9 +4,10 @@ import java.util.List;
 import java.util.UUID;
 
 public class Tests {
-    public static final RepositoriesFactory FACTORY = RepositoriesFactory.create();
 
     public static void main(String[] args) {
+        final RepositoriesFactory FACTORY = RepositoriesFactory.create();
+
         ContactDetails contactDetails1 = new ContactDetails("login1", "phone1", "mail1");
         ContactDetails contactDetails2 = new ContactDetails("login2", "phone2", "mail2");
         ContactDetails contactDetails3 = new ContactDetails("login3", "phone3", "mail3");
@@ -46,6 +47,8 @@ public class Tests {
 
         printList(buyerRepository.find());
         printList(buyerRepository2.find());
+
+        FACTORY.close();
     }
 
     private static void printList(List list) {
