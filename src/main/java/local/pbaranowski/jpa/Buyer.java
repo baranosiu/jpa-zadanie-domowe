@@ -1,6 +1,5 @@
 package local.pbaranowski.jpa;
 
-import local.pbaranowski.jpa.ContactDetails;
 import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;
@@ -17,6 +16,18 @@ public class Buyer {
     private UUID id;
 
     @Embedded
+    @AttributeOverride(
+            name = "login",
+            column = @Column(name = "buy_login")
+    )
+    @AttributeOverride(
+            name = "phone",
+            column = @Column(name = "phone_number", length = 20)
+    )
+    @AttributeOverride(
+            name = "mail",
+            column = @Column(name = "mail_address", length = 150)
+    )
     private ContactDetails contactDetails;
 
     public Buyer(UUID id, ContactDetails contactDetails) {
@@ -25,8 +36,9 @@ public class Buyer {
     }
 
     public Buyer(ContactDetails contactDetails) {
-        this(UUID.randomUUID(),contactDetails);
+        this(UUID.randomUUID(), contactDetails);
     }
 
-    public Buyer() {}
+    public Buyer() {
+    }
 }

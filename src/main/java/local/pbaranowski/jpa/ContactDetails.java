@@ -13,10 +13,9 @@ public class ContactDetails {
     private String login;
 
     @Setter
-    @Column(length = 20)
     private String phone;
+
     @Setter
-    @Column(length = 150)
     private String mail;
 
     public ContactDetails(String login, String phone, String mail) {
