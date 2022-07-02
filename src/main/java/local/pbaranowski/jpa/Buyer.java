@@ -1,5 +1,6 @@
 package local.pbaranowski.jpa;
 
+import local.pbaranowski.jpa.ContactDetails;
 import lombok.Getter;
 import lombok.ToString;
 import org.hibernate.annotations.Type;

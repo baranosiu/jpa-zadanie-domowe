@@ -1,6 +1,5 @@
 package local.pbaranowski.jpa;
 
-import javax.persistence.criteria.CriteriaBuilder;
 import java.util.List;
 import java.util.UUID;
 
