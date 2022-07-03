@@ -29,7 +29,7 @@ public class Seller implements EntityToStore {
         this(UUID.randomUUID(), contactDetails);
     }
 
-    public Seller() {
+    private Seller() {
     }
 
 }

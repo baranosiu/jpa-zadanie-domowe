@@ -28,7 +28,7 @@ public class Buyer implements EntityToStore {
         this(UUID.randomUUID(), contactDetails);
     }
 
-    public Buyer() {
+    private Buyer() {
     }
 
 }

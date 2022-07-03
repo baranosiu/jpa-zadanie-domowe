@@ -21,8 +21,8 @@ public class EntityRepository<T extends EntityToStore> {
         this.entityClass = entityClass;
     }
 
-    private <T> String getTableName(EntityManager em, Class<T> entityClass) {
-        Metamodel meta = em.getMetamodel();
+    private <T> String getTableName(Class<T> entityClass) {
+        Metamodel meta = entityManager.getMetamodel();
         EntityType<T> entityType = meta.entity(entityClass);
         Table t = entityClass.getAnnotation(Table.class);
         String tableName = (t == null) ? entityType.getName() : t.name();
@@ -30,35 +30,35 @@ public class EntityRepository<T extends EntityToStore> {
     }
 
     public String getTableName() {
-        return getTableName(entityManager, entityClass);
+        return getTableName(entityClass);
     }
 
-    UUID save(T entityToStore) {
-        return doInTransaction(EntityManager::persist, entityToStore);
+    UUID save(T entity) {
+        return doInTransaction(EntityManager::persist, entity);
     }
 
-    void update(T entityToStore) {
-        doInTransaction(EntityManager::merge, entityToStore);
+    void update(T entity) {
+        doInTransaction(EntityManager::merge, entity);
     }
 
     void update(UUID id) {
         find(id).forEach(this::update);
     }
 
-    void delete(T entityToStore) {
-        doInTransaction(EntityManager::remove, entityToStore);
+    void delete(T entity) {
+        doInTransaction(EntityManager::remove, entity);
     }
 
     void delete(UUID id) {
-        find(id).forEach(this::delete);
+        find(id).forEach(this::delete); // Można też przez createQuery() - zaoszczędzenie SELECT-a
     }
 
-    UUID doInTransaction(BiConsumer<EntityManager, T> biConsumer, T entityToStore) {
+    UUID doInTransaction(BiConsumer<EntityManager, T> biConsumer, T entity) {
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
-        biConsumer.accept(entityManager, entityToStore);
+        biConsumer.accept(entityManager, entity);
         transaction.commit();
-        return entityToStore.getId();
+        return entity.getId();
     }
 
     List<T> find() {

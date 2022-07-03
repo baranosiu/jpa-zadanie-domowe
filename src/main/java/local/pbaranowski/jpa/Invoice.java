@@ -27,7 +27,7 @@ public class Invoice implements EntityToStore {
         this.status = status;
     }
 
-    public Invoice() {
+    private Invoice() {
     }
 
 }
