@@ -7,12 +7,9 @@ import lombok.ToString;
 
 import java.util.UUID;
 
-@Entity(name = Invoice.TABLE_NAME)
+@Entity
 @ToString
 public class Invoice implements EntityToStore {
-    @Transient
-    public static final String TABLE_NAME = "invoice";
-
     @Getter
     @Id
     private UUID id;

@@ -14,16 +14,12 @@ public class RepositoriesFactory {
         return new RepositoriesFactory(Persistence.createEntityManagerFactory("Shop"));
     }
 
-    public BuyerRepository BuyersRepository() {
-        return new BuyerRepository(entityManagerFactory.createEntityManager(), Buyer.TABLE_NAME);
+    public EntityRepository getRepository(Class entityClass) {
+        return new EntityRepository(entityManagerFactory.createEntityManager(),entityClass);
     }
 
     public InvoiceRepository InvoiceRepository() {
-        return new InvoiceRepository(entityManagerFactory.createEntityManager(), Invoice.TABLE_NAME);
-    }
-
-    public SellerRepository SellerRepository() {
-        return new SellerRepository(entityManagerFactory.createEntityManager(), Seller.TABLE_NAME);
+        return new InvoiceRepository(entityManagerFactory.createEntityManager(), Invoice.class);
     }
 
     public void close() {

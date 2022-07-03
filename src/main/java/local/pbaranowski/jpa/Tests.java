@@ -1,5 +1,7 @@
 package local.pbaranowski.jpa;
 
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
 import java.util.UUID;
 
@@ -12,7 +14,7 @@ public class Tests {
         ContactDetails contactDetails2 = new ContactDetails("login2", "phone2", "mail2");
         ContactDetails contactDetails3 = new ContactDetails("login3", "phone3", "mail3");
 
-        BuyerRepository buyerRepository = FACTORY.BuyersRepository();
+        EntityRepository<Buyer> buyerRepository = FACTORY.getRepository(Buyer.class);
         UUID buyer1 = buyerRepository.save(new Buyer(contactDetails1));
         UUID buyer2 = buyerRepository.save(new Buyer(contactDetails2));
         UUID buyer3 = buyerRepository.save(new Buyer(contactDetails3));
@@ -21,7 +23,8 @@ public class Tests {
         buyerRepository.delete(buyer2);
         printList(buyerRepository.find());
 
-        InvoiceRepository invoiceRepository = FACTORY.InvoiceRepository();
+        InvoiceRepository invoiceRepository = FACTORY.InvoiceRepository(); // Rozszerzona o dodatkowe metody
+
         UUID invoice1 = invoiceRepository.save(new Invoice(InvoiceStatus.CREATED));
         UUID invoice2 = invoiceRepository.save(new Invoice(InvoiceStatus.SENT));
         UUID invoice3 = invoiceRepository.save(new Invoice(InvoiceStatus.PAYED));
@@ -30,7 +33,7 @@ public class Tests {
         invoiceRepository.changeStatus(invoice2, InvoiceStatus.PAYED);
         printList(invoiceRepository.find());
 
-        SellerRepository sellerRepository = FACTORY.SellerRepository();
+        EntityRepository<Seller> sellerRepository = FACTORY.getRepository(Seller.class);
         contactDetails1.setMail("nowyEmail");
         UUID seller1 = sellerRepository.save(new Seller(contactDetails1));
         UUID seller2 = sellerRepository.save(new Seller(contactDetails2));
@@ -41,7 +44,7 @@ public class Tests {
 
         printList(buyerRepository.find());
 
-        BuyerRepository buyerRepository2 = FACTORY.BuyersRepository();
+        EntityRepository<Buyer> buyerRepository2 = FACTORY.getRepository(Buyer.class);
         printList(buyerRepository2.find());
         buyerRepository.update(buyer1);
 

@@ -4,8 +4,8 @@ import java.util.UUID;
 
 public class InvoiceRepository extends EntityRepository<Invoice>{
 
-    public InvoiceRepository(EntityManager entityManager, String tableName) {
-        super(entityManager,tableName);
+    public InvoiceRepository(EntityManager entityManager, Class<Invoice> invoiceClass) {
+        super(entityManager,invoiceClass);
     }
 
     void changeStatus(UUID id, InvoiceStatus status) {

@@ -8,11 +8,8 @@ import lombok.ToString;
 import java.util.UUID;
 
 @ToString
-@Entity(name = Seller.TABLE_NAME)
+@Entity
 public class Seller implements EntityToStore {
-    @Transient
-    public static final String TABLE_NAME = "seller";
-
     @Getter
     @Id
     private UUID id;
