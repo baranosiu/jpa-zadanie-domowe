@@ -5,7 +5,11 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+
 
 @Entity
 @ToString
@@ -18,16 +22,23 @@ public class Invoice implements EntityToStore {
     @Enumerated(EnumType.STRING)
     private InvoiceStatus status;
 
+    @ElementCollection
+    private Set<InvoiceItem> items = new HashSet<>();
+
+    private LocalDate date;
+
+    public Invoice() {
+
+    }
+
+    void add(InvoiceItem item) {
+        items.add(item);
+    }
+
     public Invoice(InvoiceStatus status) {
-        this(UUID.randomUUID(),status);
-    }
-
-    public Invoice(UUID id, InvoiceStatus status) {
-        this.id = id;
+        this.id = UUID.randomUUID();
         this.status = status;
-    }
-
-    private Invoice() {
+        this.date = LocalDate.now();
     }
 
 }
