@@ -1,18 +1,17 @@
 package local.pbaranowski.jpa;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 import java.util.UUID;
 
-@Entity
+@Entity(name = Invoice.TABLE_NAME)
 @ToString
-public class Invoice {
+public class Invoice implements EntityToStore {
+    @Transient
+    public static final String TABLE_NAME = "invoice";
 
     @Getter
     @Id
@@ -23,8 +22,7 @@ public class Invoice {
     private InvoiceStatus status;
 
     public Invoice(InvoiceStatus status) {
-        id = UUID.randomUUID();
-        this.status = status;
+        this(UUID.randomUUID(),status);
     }
 
     public Invoice(UUID id, InvoiceStatus status) {
@@ -34,4 +32,5 @@ public class Invoice {
 
     public Invoice() {
     }
+
 }

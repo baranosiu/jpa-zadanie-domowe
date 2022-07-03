@@ -4,13 +4,14 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.Type;
 
 import java.util.UUID;
 
 @ToString
-@Entity
-public class Seller {
+@Entity(name = Seller.TABLE_NAME)
+public class Seller implements EntityToStore {
+    @Transient
+    public static final String TABLE_NAME = "seller";
 
     @Getter
     @Id
@@ -33,4 +34,5 @@ public class Seller {
 
     public Seller() {
     }
+
 }

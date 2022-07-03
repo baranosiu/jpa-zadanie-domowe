@@ -15,15 +15,15 @@ public class RepositoriesFactory {
     }
 
     public BuyerRepository BuyersRepository() {
-        return new BuyerRepository(entityManagerFactory.createEntityManager());
+        return new BuyerRepository(entityManagerFactory.createEntityManager(), Buyer.TABLE_NAME);
     }
 
     public InvoiceRepository InvoiceRepository() {
-        return new InvoiceRepository(entityManagerFactory.createEntityManager());
+        return new InvoiceRepository(entityManagerFactory.createEntityManager(), Invoice.TABLE_NAME);
     }
 
     public SellerRepository SellerRepository() {
-        return new SellerRepository(entityManagerFactory.createEntityManager());
+        return new SellerRepository(entityManagerFactory.createEntityManager(), Seller.TABLE_NAME);
     }
 
     public void close() {
