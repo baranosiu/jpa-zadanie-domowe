@@ -1,3 +1,3 @@
-# Zadanie domowe z JPA
+# JPA - testy z PostgreSQL
 
-Chodziło o implementację `getTableName()` w `EntityRepository` /linia 70/ do składania zapytania :D
+To jest branch do testów z PostgreSQL.
