@@ -9,14 +9,17 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 public class LocalDateAdapter extends TypeAdapter<LocalDate> {
+    public static final String YEAR = "year";
+    public static final String MONTH = "month";
+    public static final String DAY = "day";
     @Override
     public void write(JsonWriter jsonWriter, LocalDate localDate) throws IOException {
         jsonWriter.beginObject();
-        jsonWriter.name("year");
+        jsonWriter.name(YEAR);
         jsonWriter.value(localDate.getYear());
-        jsonWriter.name("month");
+        jsonWriter.name(MONTH);
         jsonWriter.value(localDate.getMonthValue());
-        jsonWriter.name("day");
+        jsonWriter.name(DAY);
         jsonWriter.value(localDate.getDayOfMonth());
         jsonWriter.endObject();
     }
@@ -33,17 +36,13 @@ public class LocalDateAdapter extends TypeAdapter<LocalDate> {
             if (jsonToken.equals(JsonToken.NAME)) {
                 fieldname = jsonReader.nextName();
             }
-            if ("year".equals(fieldname)) {
-                jsonToken = jsonReader.peek();
-                year = jsonReader.nextInt();
-            }
-            if ("month".equals(fieldname)) {
-                jsonToken = jsonReader.peek();
-                month = jsonReader.nextInt();
-            }
-            if ("day".equals(fieldname)) {
-                jsonToken = jsonReader.peek();
-                day = jsonReader.nextInt();
+            jsonToken = jsonReader.peek();
+            if (jsonToken.equals(JsonToken.NUMBER)) {
+                switch (fieldname) {
+                    case YEAR -> year = jsonReader.nextInt();
+                    case MONTH -> month = jsonReader.nextInt();
+                    case DAY -> day = jsonReader.nextInt();
+                }
             }
         }
         jsonReader.endObject();
