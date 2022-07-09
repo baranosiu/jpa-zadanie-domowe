@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import jakarta.persistence.EntityManager;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.UUID;
 
@@ -34,7 +35,10 @@ public class Tests {
     }
 
     private static void printList(List list) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        Gson gson = new GsonBuilder()
+                .setPrettyPrinting()
+                .registerTypeAdapter(LocalDate.class,new LocalDateAdapter())
+                .create();
         list.forEach(item -> System.out.println("------ " + item.getClass().getSimpleName() + System.lineSeparator() + gson.toJson(item).toString() + System.lineSeparator()));
     }
 }
