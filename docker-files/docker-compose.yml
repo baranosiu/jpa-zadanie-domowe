@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   db:
-    image: postgres:latest
+    image: postgres:14.4-alpine
     restart: always
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -11,6 +11,7 @@ services:
         - '5432:5432'
     volumes:
       - 'pg_data:/var/lib/postgresql/data'
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
 volumes:
   pg_data:

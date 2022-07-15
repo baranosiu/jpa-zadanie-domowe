@@ -29,6 +29,11 @@ public class Tests {
         invoice.add(item2);
         InvoiceRepository invoiceRepository = FACTORY.InvoiceRepository(); // Rozszerzona o dodatkowe metody
         invoiceRepository.save(invoice);
+        EntityRepository<Buyer> buyerEntityRepository = FACTORY.getRepository(Buyer.class);
+        for (int i = 0; i < 10; i++) {
+            Buyer buyer = new Buyer(new ContactDetails("login1", "phone1", "email1"));
+            buyerEntityRepository.save(buyer);
+        }
         printList(invoiceRepository.find());
 
         FACTORY.close();
@@ -37,7 +42,7 @@ public class Tests {
     private static void printList(List list) {
         Gson gson = new GsonBuilder()
                 .setPrettyPrinting()
-                .registerTypeAdapter(LocalDate.class,new LocalDateAdapter())
+                .registerTypeAdapter(LocalDate.class, new LocalDateAdapter())
                 .create();
         list.forEach(item -> System.out.println("------ " + item.getClass().getSimpleName() + System.lineSeparator() + gson.toJson(item).toString() + System.lineSeparator()));
     }
